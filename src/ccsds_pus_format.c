@@ -42,3 +42,30 @@ uint8_t ccsds_pus_tc_get_sourceID(uint32_t tc_df_header) {
 	return(tc_df_header & 0x000000FF);
 
 }
+
+void ccsds_pus_tc_get_fields(uint8_t tc_bytes[],
+                             uint16_t * p_tc_packet_id,
+                             uint16_t * p_packet_seq_ctrl,
+                             uint16_t * p_tc_packet_len,
+                             uint32_t * p_tc_df_header,
+                             uint16_t * p_tc_packet_err_ctrl) {
+
+    // Deserialize Packet ID and store it at p_tc_packet_id
+    *p_tc_packet_id = deserialize_uint16(&tc_bytes[0]);
+
+    // TODO: Deserialize Packet Seq. Control and store it at p_tc_packet_seq_ctrl
+    *p_packet_seq_ctrl = deserialize_uint16(&tc_bytes[2]);
+
+    // TODO: Deserialize Packet Length and store it at p_tc_packet_len
+    *p_tc_packet_len = deserialize_uint16(&tc_bytes[4]);
+
+    // TODO: Deserialize Data Field Header and store it at p_tc_df_header
+    *p_tc_df_header = deserialize_uint32(&tc_bytes[6]);
+
+    // Hay que saber cuántos bytes (pista: depende de packet length
+
+    // TODO: Deserialize Packet Error Control and store it at p_tc_packet_err_ctrl
+	*p_tc_packet_err_ctrl = deserialize_uint16(&tc_bytes[*p_tc_packet_len + 5]);
+
+}
+
