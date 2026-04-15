@@ -1,5 +1,7 @@
 #include "basic_types.h"
 #include "ccsds_pus_format.h"
+#include "serialize.h"
+
 
 uint16_t ccsds_pus_tc_get_APID(uint16_t tc_packet_id) {
 
@@ -78,7 +80,7 @@ uint16_t ccsds_pus_tm_build_packet_id(uint16_t apid) {
 }
 
 // TODO: Define function ccsds_pus_tm_build_packet_seq_ctrl
-uint16_t ccsds_pus_tm_build_packet_seq_ctrl(uint16_t  sequence_count, uint8_t sequence_flags){
+uint16_t ccsds_pus_tm_build_packet_seq_ctrl(uint16_t sequence_flags, uint8_t sequence_count) {
 
 	uint16_t tm_packet_seq_ctrl;
 	tm_packet_seq_ctrl = (sequence_flags << 14) | (sequence_count & 0x3FFF);

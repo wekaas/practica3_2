@@ -6,6 +6,9 @@
 #include "basic_types.h"
 // Includes the field extraction function declarations
 #include "ccsds_pus_format.h"
+#include "ccsds_pus_stdio.h"
+#include "crc.h"
+#include "epd_pus_tmtc.h"
 
 int main() {
 

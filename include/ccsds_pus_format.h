@@ -112,7 +112,7 @@ uint16_t ccsds_pus_tm_build_packet_id(uint16_t apid);
  * \return the Packet Sequence Control field
  */
 // TODO: Declare function ccsds_pus_tm_build_packet_seq_ctrl
-uint16_t ccsds_pus_tm_build_packet_seq_ctrl(uint16_t  sequence_count, uint8_t sequence_flags);
+uint16_t ccsds_pus_tm_build_packet_seq_ctrl(uint16_t sequence_flags, uint8_t sequence_count);
 
 /**
  * \brief Builds the Data Field Header of a telmetry.
