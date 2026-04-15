@@ -69,3 +69,58 @@ void ccsds_pus_tc_get_fields(uint8_t tc_bytes[],
 
 }
 
+uint16_t ccsds_pus_tm_build_packet_id(uint16_t apid) {
+
+	uint16_t tm_packet_id;
+	tm_packet_id = (1 << 11) | (apid & 0x07FF);
+	return tm_packet_id;
+
+}
+
+// TODO: Define function ccsds_pus_tm_build_packet_seq_ctrl
+uint16_t ccsds_pus_tm_build_packet_seq_ctrl(uint16_t  sequence_count, uint8_t sequence_flags){
+
+	uint16_t tm_packet_seq_ctrl;
+	tm_packet_seq_ctrl = (sequence_flags << 14) | (sequence_count & 0x3FFF);
+	return(tm_packet_seq_ctrl);
+
+}
+// TODO: Define function ccsds_pus_tm_build_df_header
+uint32_t ccsds_pus_tm_build_df_header(uint8_t service_type, uint8_t service_subtype, uint8_t destination_ID){
+
+	uint32_t tm_df_header;
+	tm_df_header = (1 << 28) | (service_type << 16) | (service_subtype << 8) | destination_ID;
+	return(tm_df_header);
+}
+
+/**
+ * \brief Serializes and stores into a vector the main fields of a TM packet.
+ *
+ * \param tm_bytes vector that will store the generated serialized telemetry
+ * \param tm_packet_id the Packet ID field of the generated telemetry
+ * \param tm_packet_seq_ctrl the Packet Sequence Control field of the
+ *                           generated telemetry
+ * \param tm_packet_length the Packet Length of the generated telemetry
+ * \param tm_df_header the Data Field Header of the generated telemetry
+ */
+void ccsds_pus_tm_set_fields(uint8_t tm_bytes[],
+                             uint16_t tm_packet_id,
+                             uint16_t tm_packet_seq_ctrl,
+                             uint16_t tm_packet_length,
+                             uint32_t tm_df_header) {
+
+    serialize_uint16(tm_packet_id, &tm_bytes[0]);
+
+    // TODO: Finish the implementation of the function
+
+    serialize_uint16(tm_packet_seq_ctrl, &tm_bytes[2]);
+
+    serialize_uint16(tm_packet_length, &tm_bytes[4]);
+
+    serialize_uint32(tm_df_header, &tm_bytes[6]);
+}
+
+
+
+
+
