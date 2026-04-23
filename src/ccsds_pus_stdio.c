@@ -4,6 +4,7 @@
 #include "basic_types.h"
 #include "ccsds_pus_stdio.h"
 #include "ccsds_pus_format.h"
+#include "serialize.h"
 
 void ccsds_pus_tmtc_print_packet_header_fields(uint16_t tc_packet_id) {
 	printf("APID: 0x%X\n", ccsds_pus_tc_get_APID(tc_packet_id));

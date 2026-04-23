@@ -51,7 +51,7 @@ void epd_pus_build_tm_1_2_crc_error(uint8_t tm_bytes[],
 
     packet_length = 0x0D;
 
-    df_header = ccsds_pus_tm_build_df_header(1, 1, EPD_DESTINATION_ID);
+    df_header = ccsds_pus_tm_build_df_header(1, 2, EPD_DESTINATION_ID);
 
     ccsds_pus_tm_set_fields(&tm_bytes[0], packet_id,
                             packet_seq_ctrl, packet_length, df_header);

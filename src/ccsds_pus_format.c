@@ -2,49 +2,6 @@
 #include "ccsds_pus_format.h"
 #include "serialize.h"
 
-
-uint16_t ccsds_pus_tc_get_APID(uint16_t tc_packet_id) {
-
-    return (tc_packet_id & 0x07FF);
-
-}
-
-uint8_t ccsds_pus_tc_get_seq_flags(uint16_t tc_packet_seq_ctrl) {
-
-	return ((tc_packet_seq_ctrl & 0xC000) >> 14);
-
-}
-
-uint16_t ccsds_pus_tc_get_seq_count(uint16_t tc_packet_seq_ctrl) {
-
-	return(tc_packet_seq_ctrl & 0x3FFF);
-
-}
-
-uint8_t ccsds_pus_tc_get_ack(uint32_t tc_df_header) {
-
-	return((tc_df_header & 0x0F000000) >> 24);
-
-}
-
-uint8_t ccsds_pus_tc_get_type(uint32_t tc_df_header) {
-
-	return((tc_df_header & 0x00FF0000) >> 16);
-
-}
-
-uint8_t ccsds_pus_tc_get_subtype(uint32_t tc_df_header) {
-
-	return((tc_df_header & 0x0000FF00) >> 8);
-
-}
-
-uint8_t ccsds_pus_tc_get_sourceID(uint32_t tc_df_header) {
-
-	return(tc_df_header & 0x000000FF);
-
-}
-
 void ccsds_pus_tc_get_fields(uint8_t tc_bytes[],
                              uint16_t * p_tc_packet_id,
                              uint16_t * p_packet_seq_ctrl,
@@ -71,29 +28,6 @@ void ccsds_pus_tc_get_fields(uint8_t tc_bytes[],
 
 }
 
-uint16_t ccsds_pus_tm_build_packet_id(uint16_t apid) {
-
-	uint16_t tm_packet_id;
-	tm_packet_id = (1 << 11) | (apid & 0x07FF);
-	return tm_packet_id;
-
-}
-
-// TODO: Define function ccsds_pus_tm_build_packet_seq_ctrl
-uint16_t ccsds_pus_tm_build_packet_seq_ctrl(uint16_t sequence_flags, uint8_t sequence_count) {
-
-	uint16_t tm_packet_seq_ctrl;
-	tm_packet_seq_ctrl = (sequence_flags << 14) | (sequence_count & 0x3FFF);
-	return(tm_packet_seq_ctrl);
-
-}
-// TODO: Define function ccsds_pus_tm_build_df_header
-uint32_t ccsds_pus_tm_build_df_header(uint8_t service_type, uint8_t service_subtype, uint8_t destination_ID){
-
-	uint32_t tm_df_header;
-	tm_df_header = (1 << 28) | (service_type << 16) | (service_subtype << 8) | destination_ID;
-	return(tm_df_header);
-}
 
 /**
  * \brief Serializes and stores into a vector the main fields of a TM packet.
